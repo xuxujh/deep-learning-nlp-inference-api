@@ -1,0 +1,15 @@
+model:
+  name_or_path: "prajjwal1/bert-tiny"
+  max_length: 128
+  num_classes: 2
+  dropout_rate: 0.1
+
+training:
+  batch_size: 16
+  learning_rate: 0.00005
+  epochs: 3
+  device: "cpu"
+
+serving:
+  host: "0.0.0.0"
+  port: 8000
