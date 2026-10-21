@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 import torch
 import yaml
@@ -69,7 +69,7 @@ class TextClassificationTransformer(nn.Module):
 class NLPInferenceEngine:
     """Motor de inferência desacoplado para execução do forward pass e cálculo de probabilidades."""
 
-    LABELS = {0: "COMPLIANT", 1: "GREENWASHING_RISK"}
+    LABELS: ClassVar[dict[int, str]] = {0: "COMPLIANT", 1: "GREENWASHING_RISK"}
 
     def __init__(
         self, model_name: str = "prajjwal1/bert-tiny", device: str = "cpu", offline_mode: bool = False
