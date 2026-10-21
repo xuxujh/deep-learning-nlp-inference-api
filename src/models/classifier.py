@@ -4,8 +4,8 @@ from pathlib import Path
 from typing import Any
 
 import torch
-import torch.nn as nn
 import yaml
+from torch import nn
 from transformers import AutoConfig, AutoModel, AutoTokenizer
 
 
@@ -71,7 +71,9 @@ class NLPInferenceEngine:
 
     LABELS = {0: "COMPLIANT", 1: "GREENWASHING_RISK"}
 
-    def __init__(self, model_name: str = "prajjwal1/bert-tiny", device: str = "cpu", offline_mode: bool = False) -> None:
+    def __init__(
+        self, model_name: str = "prajjwal1/bert-tiny", device: str = "cpu", offline_mode: bool = False
+    ) -> None:
         self.device = torch.device(device)
         self.offline_mode = offline_mode
         if not offline_mode:
