@@ -4,10 +4,10 @@ import os
 import torch
 from fastapi.testclient import TestClient
 
-os.environ["OFFLINE_MODE"] = "true"
-
 from src.models.classifier import TextClassificationTransformer
 from src.serving.app import app
+
+os.environ["OFFLINE_MODE"] = "true"
 
 
 def test_transformer_forward_shape() -> None:
@@ -30,9 +30,9 @@ def test_health_endpoint() -> None:
 
 
 def test_predict_endpoint_valid_payload() -> None:
-    """Valida o contrato de resposta e distribuição de probabilidades no endpoint /predict."""
+    """Valida o contrato de resposta e distribuicao de probabilidades no endpoint /predict."""
     with TestClient(app) as client:
-        payload = {"text": "Emissões de escopo 1 reduzidas em 18% conforme auditoria ISO 14064."}
+        payload = {"text": "Emissoes de escopo 1 reduzidas em 18% conforme auditoria ISO 14064."}
         response = client.post("/predict", json=payload)
         assert response.status_code == 200
         data = response.json()
@@ -44,7 +44,7 @@ def test_predict_endpoint_valid_payload() -> None:
 
 
 def test_predict_endpoint_invalid_short_text() -> None:
-    """Valida a rejeição automática do Pydantic para textos fora do contrato mínimo."""
+    """Valida a rejeicao automatica do Pydantic para textos fora do contrato minimo."""
     with TestClient(app) as client:
         response = client.post("/predict", json={"text": "abc"})
         assert response.status_code == 422
